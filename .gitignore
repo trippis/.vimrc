@@ -1,0 +1,9 @@
+ws
+storage
+.vim
+.viminfo
+.python_history
+.npm
+.node_repl_history
+.bash_history
+.gitconfig
