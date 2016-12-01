@@ -22,32 +22,34 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'Raimondi/delimitMate' "provide insert mode auto-completion for quotes etc
 Plug 'SirVer/ultisnips' "the ultimate snippet solution for vim
+Plug 'helino/vim-json' " filetype detection and syntax highlighting for JS
+Plug 'othree/html5-syntax.vim' " HTML5 syntax for vim
+Plug 'othree/html5.vim' " HTML5 omnicomplete and syntax
+Plug 'othree/javascript-libraries-syntax.vim' " syntax file for JS libraries
+Plug 'moll/vim-node' " superb for developing node.js apps with vim
+Plug 'walm/jshint.vim' " for linting JS files
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install' } "provides autocompletion
 Plug 'pangloss/vim-javascript' " syntax highlighting and indentation
 Plug 'scrooloose/syntastic' " syntax checking hacks for vim
 Plug 'tpope/vim-commentary' " comment stuff out
 Plug 'tpope/vim-sensible' " a sensible set of default settings
-Plug 'walm/jshint.vim' " for linting JS files
 
 call plug#end()
 
 " UltiSnips directory & trigger configuration. Do not use <tab> if you use YCP
 let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-f>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsJumpForwardTrigger="<Tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 
 " Syntastic configuration
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntatsic_check_on_wq = 0
+" use jshint and show any linting errors immediately
 let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_check_on_open = 1
 
-
-
-
+" configure javascript-libraries-syntax
+let g:used_javascript_libraries = 'jquery,angularjs'
