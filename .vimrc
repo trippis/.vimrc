@@ -1,12 +1,65 @@
-" system settings
-set nocompatible " don't use old vi commands
-set noshowmode
+" Required system settings inspired by
+" http://stevelosh.com/blog/2010/09/coming-home-to-vim/
+set nocompatible
+set modelines=0
+set showmode
 set noswapfile
-set tabstop=2 shiftwidth=2 expandtab
-set relativenumber number " Vim 8.0 enables hybrid numbering mode
-set numberwidth=4 " number margin width
-set textwidth=80 " wrap at 80 characters
-set colorcolumn=+1 " make it obvious where 80 charaters is
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+set relativenumber number
+set numberwidth=4
+set wrap
+set textwidth=80
+set colorcolumn=+1
+set formatoptions=qrn1
+set encoding=utf-8
+set scrolloff=3
+set autoindent
+set showcmd
+set hidden
+set wildmenu
+set wildmode=list:longest
+set visualbell
+set cursorline
+set ttyfast
+set ruler
+set backspace=indent,eol,start
+set laststatus=2
+set undodir=~/.vim/undofiles
+set undofile
+
+" remap leader
+let mapleader =  ","
+
+" tame search/moving
+set ignorecase
+set smartcase
+set incsearch
+set showmatch
+set hlsearch
+set gdefault
+
+" handy key mappings
+inoremap jj <ESC>
+vnoremap jj <ESC>
+nnoremap <leader><space> :noh<CR>
+nnoremap ; :
+
+" user specific custom functions
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+nnoremap <leader>v V`]
+nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+nnoremap <leader>w <C-w>v<C-w>l 
+nnoremap <leader>rf :so %<CR>
+nnoremap <leader>pi :PlugInstall<cr>
+nnoremap <leader>pc :PlugClean<cr>
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-s> <C-w>s
+
+" auto save on exit or tabbing to another app
+au FocusLost * :wa
 
 syntax on
 syntax enable
@@ -16,7 +69,7 @@ if (has("termguicolors"))
 	set termguicolors
 endif
 
-colorscheme base16-ocean
+colorscheme base16-monokai
 
 " habit breaker - stop using the arrow keys
 nnoremap <Left> :echo "Use H key for left" <CR>
@@ -49,8 +102,9 @@ Plug 'leafgarland/typescript-vim' " Typescript syntax files for vim
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " Interactive command execution
 Plug 'Quramy/tsuquyomi' " vim plugin for typescript
 Plug 'scrooloose/syntastic' " syntax checking hacks for vim
-Plug 'tpope/vim-commentary' " comment stuff out
+Plug 'scrooloose/nerdcommenter' " intensely orgasmic commenting
 Plug 'scrooloose/nerdtree' " nav panel for folder structure
+Plug 'tpope/vim-fugitive' " a Git wrapper so awesome
 
 call plug#end()
 
@@ -67,7 +121,8 @@ set statusline+=%*
 
 " syntastic settings and show any linting errors immediately
 let g:syntastic_javascript_checkers = ['jshint']
-let g:syntatsic_typescript_checkers = ['tsuquyomi']
+let g:syntastic_typescript_checkers = ['tsuquyomi']
+let g:syntastic_typescript_tsc_args = '--target ES5 --noEmit'
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
